@@ -1,3 +1,6 @@
 YuL -- 1/11/26 10:45am
 - repo structure now in place
 - updated README for appropriate launch codes
+
+Yul -- 1/11/26 11:30am
+- Added blueprints for templates (profile login homepage register) and Flask routes

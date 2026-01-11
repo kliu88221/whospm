@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Pizza Time // whospm
+  Roster: Yu L, Kyle L, Emily M, Jun Jie L
+  SoftDev
+ -->
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pizza Time</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <!-- Flash Message -->
+  <body class = "flex flex-col justify-center items-center text-center">
+    <div class = "flash w-full select-none">
+    {% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="w-full">
+            {% for message in messages %}
+            <div class="bg-orange-300/70 text-black py-4 text-center">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {% endblock %}
+    </div>
+
+    <div class="header">
+      <h1>
+      </h1>
+    </div>
+
+    <div class = "middle">
+      {% if logged_in %}
+      <p>its.. pizza time..</p>
+
+      {% else %}
+      <h3>its.. pizza time..</h3>
+      <hr>
+    </div>
+
+    <br>
+    <hr>
+
+    <div class = "footer">
+      <p>
+      </p>
+    </div>
+      {% endif %}
+    <p>
+      Return to <a href= "/" class ="text-black hover:text-orange-400"> homepage</a><br>
+    </p>
+  </body>
+
+</html>
