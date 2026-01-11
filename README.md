@@ -1,4 +1,4 @@
-# Pizza Time by <b>whospm
+# Pizza Time by <b>whospm</b>
 
 **Kyle Liu** -  Project Manager <br>
 handle templates + site design with TailwindCss/Jinja/Js<br>
@@ -14,7 +14,7 @@ handle templates + site design with TailwindCss/Jinja/Js<br>
 <br>
 
 # Description:
-<i>It's pizza time... build your custom pizza with ingredients and tag it with various different tags! Share it to your friends and the world to take a step into becoming the next big famous food influencer!11!1
+<i>It's pizza time... build your custom pizza with ingredients and tag it with various different tags! Share it to your friends and the world to take a step into becoming the next big famous food influencer!11!1</i>
 
 
 # Install Guide:
