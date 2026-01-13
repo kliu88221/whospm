@@ -12,12 +12,28 @@ let currentTool = null;
 function drawPizza() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    ctx.beginPath();
+    ctx.arc(250, 250, 200, Math.PI, -Math.PI)
+    ctx.lineWidth = 5
+    ctx.stroke()
+    ctx.fillStyle = "#f5deb3"
+    ctx.fill()
+
+    if(pizza.sauce.name != "None"){
+      ctx.beginPath();
+      ctx.arc(250, 250, 180, Math.PI, -Math.PI)
+      ctx.fillStyle = pizza.sauce.color
+      ctx.fill()
+    }
+
 }
 
 function setSauce(name, color) {
+  // set using button, sauce name and then color in hex?. pushing to pizza
 }
 
 function setTool(id, name) {
+  // set using button, id should be incremental int, and then name just ingredient name
 }
 
 
