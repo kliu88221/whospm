@@ -4,3 +4,8 @@ YuL -- 1/11/26 10:45am
 
 Yul -- 1/11/26 11:30am
 - Added blueprints for templates (profile login homepage register) and Flask routes
+
+
+Yul -- 1/13/26 6:00am
+- blueprints for canvas
+- added design doc upates

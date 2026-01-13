@@ -1,0 +1,1 @@
+js how to get mouse coordinate in a canvas?

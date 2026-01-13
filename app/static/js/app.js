@@ -21,13 +21,13 @@ function setTool(id, name) {
 }
 
 
-canvas.addEventListener('mousedown', (e) => {
+canvas.addEventListener('mousedown', (evt) => {
     if (!currentTool) return; // do nothing if no topping selected
 
     // xycoordinates relative to canvas
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = evt.clientX - rect.left;
+    const y = evt.clientY - rect.top;
 
     pizza.toppings.push({
         id: currentTool.id,
