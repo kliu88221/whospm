@@ -25,7 +25,7 @@ def user_context(): # persistent info made avalible for all html templates
         "current_user": session.get('username')
     }
 
-@app.before_request
+#@app.before_request
 
 # ROUTING BEGINS >>
 
@@ -92,6 +92,29 @@ def profile():
     db_user = db.get_user(user)
     
     return render_template("profile.html", db_user = db_user)
+
+@app.route("/canvas", methods=['GET', 'POST'])
+def canvas():
+    return render_template("canvas.html")
+
+# Add this anywhere after the other routes
+@app.route('/db/save_pizza', methods=['POST'])
+def save_pizza_api():
+    # 1. Get the JSON data sent from Yu Lu's Javascript
+    data = request.get_json()
+    
+    # Debug print to see what arrived in the terminal
+    print("Received Pizza Data:", data)
+    
+    # 2. Check if user is logged in
+    if 'username' not in session:
+        return {"status": "error", "message": "Not logged in"}, 401
+
+    # 3. TODO: Send this data to Jun Jie's DB function
+    # Example: db.create_pizza(session['username'], data['sauce'], data['toppings'])
+    
+    # 4. Success response
+    return {"status": "success", "message": "Pizza saved!"}, 200
 
 
 if __name__ == "__main__":

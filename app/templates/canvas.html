@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Pizza Time</title>
+    <title>Draw</title>
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,14 +39,24 @@
       </h1>
     </div>
 
-    <div class = "middle">
-      {% if logged_in %}
-        <p>its.. pizza time..</p>
-      {% else %}
-        <h3>its.. pizza time..</h3>
-        <hr>
-      {% endif %}
+    <div id="controls" class="flex gap-4 mb-4">
+        <div class="sauce-group">
+            <h3>1. Pick Sauce</h3>
+            <button onclick="">Tomato</button>
+            <button onclick="">Pesto</button>
+            <button onclick="">Alfredo</button>
+        </div>
+
+        <div class="topping-group">
+            <h3>2. Pick Topping</h3>
+            <button onclick="">Pepperoni</button>
+            <button onclick="">Pinapple</button>
+            <button onclick="">Ham</button>
+        </div>
     </div>
+
+    <canvas id="pizzaCanvas" width="500" height="500" class="border rounded-lg shadow-lg"></canvas>
+    <button onclick="" class="mt-4 px-4 py-2 rounded">Done</button>
 
     <br>
     <hr>
@@ -55,11 +65,7 @@
       <p>
         Return to <a href= "/" class ="text-black hover:text-orange-400"> homepage</a><br>
       </p>
-      <p>
-        To draw <a href= "/canvas" class ="text-black hover:text-orange-400"> homepage</a><br>
-      </p>
     </div>
-
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
-
 </html>
