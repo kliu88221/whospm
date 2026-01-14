@@ -61,8 +61,31 @@ function setTool(id, name) {
   console.log("Selected: " + name)
 }
 
-function savePizza(){
-  const data = JSON.stringify(pizza)
+async function savePizza() {
+  const payload = JSON.stringify(pizza);
+
+  try {
+    const response = await fetch('/db/save_pizza', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    });
+
+    const ret = await response.json();
+
+    if (response.ok && ret.status === "success") {
+      console.log("Success:", ret);
+      alert("Pizza Saved!");
+      // window.location.href = "/profile";
+    } else {
+      alert("Failed to save: " + (ret.message || "Unknown error"));
+    }
+
+  } catch (error) {
+    // network crashes
+    console.error("Network Error:", error);
+    alert("network error, check terminal, is server up?");
+  }
 }
 
 
