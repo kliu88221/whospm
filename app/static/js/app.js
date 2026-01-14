@@ -62,7 +62,12 @@ function setTool(id, name) {
 }
 
 async function savePizza() {
+  const saveButton = document.getElementById('save');
+  const originalText = saveButton.innerText; 
   const payload = JSON.stringify(pizza);
+
+  saveBtn.innerText = "Saving...";
+  saveBtn.disabled = true;
 
   try {
     const response = await fetch('/db/save_pizza', {
@@ -74,15 +79,31 @@ async function savePizza() {
     const ret = await response.json();
 
     if (response.ok && ret.status === "success") {
-      console.log("Success:", ret);
-      alert("Pizza Saved!");
       // window.location.href = "/profile";
+      setTimeout(() => {
+        saveBtn.innerText = originalText;
+        saveBtn.disabled = false;
+        saveBtn.classList.remove("bg-blue-500", "hover:bg-blue-600");
+        saveBtn.classList.add("bg-green-500", "hover:bg-green-600");
+      }, 2000);
+      console.log("Success:", ret);
     } else {
       alert("Failed to save: " + (ret.message || "Unknown error"));
     }
 
   } catch (error) {
     // network crashes
+    console.error("save error:", error);
+    saveBtn.innerText = "Error saving!!";
+    saveBtn.classList.remove("bg-green-500");
+    saveBtn.classList.add("bg-red-500");
+
+    setTimeout(() => {
+      saveBtn.innerText = originalText;
+      saveBtn.disabled = false;
+      saveBtn.classList.remove("bg-red-500");
+      saveBtn.classList.add("bg-green-500");
+    }, 2000);
     console.error("Network Error:", error);
     alert("network error, check terminal, is server up?");
   }

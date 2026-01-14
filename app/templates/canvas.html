@@ -38,15 +38,29 @@
       <h1>
       </h1>
     </div>
-    <canvas id="pizzaCanvas" width="500" height="500" class="border rounded-lg shadow-lg"></canvas>
-    
-    <div id="controls" class="flex gap-4 mb-4">
-        <div class="sauce-group">
-            <h3>1. Pick Sauce</h3>
-            <button onclick="setSauce('Tomato', '#FF6347')">Tomato</button>
-            <button onclick="setSauce('Pesto', '#90EE90')">Pesto</button>
-            <button onclick="setSauce('Alfredo', '#FFFDD0')">Alfredo</button>
+    <canvas id="pizzaCanvas" width="500" height="500" class="border-4 border-orange-100 rounded-full bg-white cursor-crosshair">></canvas>
+
+    <div id="controls" class="w-full max-w-2xl mt-8 px-4">
+
+      <section>
+        <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">S A U C E</h3>
+        <div class="sauce-group flex justify-center gap-20">
+          <button onclick="setSauce('Tomato', '#FF6347')" class="pizza-tool-btn">
+            <p>Tomato</p>
+            <div class="w-10 h-10 rounded-full bg-[#FF6347]"></div>
+          </button>
+
+          <button onclick="setSauce('Pesto', '#90EE90')" class="pizza-tool-btn">
+            <p>Pesto</p>
+            <div class="w-10 h-10 rounded-full bg-[#90EE90]"></div>
+          </button>
+
+          <button onclick="setSauce('Alfredo', '#FFFDD0')" class="pizza-tool-btn">
+            <p>Alfredo</p>
+            <div class="w-10 h-10 rounded-full bg-[#FFFDD0]"></div>
+          </button>
         </div>
+      </section>
 
         <div class="topping-group">
             <h3>2. Pick Topping</h3>
