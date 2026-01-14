@@ -19,16 +19,16 @@ let currentTool = null;
 function drawPizza() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+
+
     ctx.beginPath();
-    ctx.arc(250, 250, 200, Math.PI, -Math.PI)
-    ctx.lineWidth = 5
-    ctx.stroke()
+    ctx.arc(250, 250, 250, Math.PI, -Math.PI)
     ctx.fillStyle = "#f5deb3"
     ctx.fill()
 
     if(pizza.sauce.name != "None"){
       ctx.beginPath();
-      ctx.arc(250, 250, 180, Math.PI, -Math.PI)
+      ctx.arc(250, 250, 225, Math.PI, -Math.PI)
       ctx.fillStyle = pizza.sauce.color
       ctx.fill()
     }
@@ -36,7 +36,7 @@ function drawPizza() {
     pizza.toppings.forEach(top =>{
       const img = toppingImgs[top.name];
       if(img){
-        let size = 50
+        let size = 75
         ctx.drawImage(img, top.x - size/2, top.y - size/2, size, size);
       }else{
         ctx.beginPath()

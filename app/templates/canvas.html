@@ -44,7 +44,7 @@
 
       <section class = "space-y-5">
         <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">S A U C E...</h3>
-        <div class="sauce-group flex justify-center gap-20">
+        <div class="flex justify-center gap-20" id="sauce-group">
           
           <button onclick="setSauce('Tomato', '#FF6347')" class="pizza-tool-btn">
             <p>Tomato</p>
@@ -65,7 +65,7 @@
       <hr>
       <section class = "space-y-14">
         <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">T O P P I N G S...</h3>
-        <div class="topping-group flex justify-center gap-20 text-2xl ">
+        <div class="flex justify-center gap-20 text-2xl " id="topping-group">
           <button onclick="setTool(1, 'Pepperoni')" class="pizza-tool-btn">
             <img src="/static/img/pepperoni.png" class="w-20 h-20 translate-x-4">
           </button>
@@ -81,7 +81,7 @@
       </section>
     </div>
 
-    <button onclick="savePizza()" class="mt-4 px-4 py-2 rounded">Done</button>
+    <button onclick="savePizza()" class="mt-4 px-4 py-2 rounded" id="saveBtn">Done</button>
 
     <br>
     <hr>
