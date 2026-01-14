@@ -9,3 +9,7 @@ Yul -- 1/11/26 11:30am
 Yul -- 1/13/26 6:00am
 - blueprints for canvas
 - added design doc upates
+
+Yul -- 1/14/26 6:00am
+- reformatted canvas, added prelim for saving pizza to db (by fetch as POST to flask function)
+- better visuals added small ghosting to preview ingredient location, fixed ingredients and uses images from static/img now
