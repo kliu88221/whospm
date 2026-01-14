@@ -31,11 +31,34 @@ DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(topping_id INTEGER P
 
 
 # Database functions >>
-'''
 #user stuff
 def add_user(username, password):
-def get_user(username):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    DB_CURSOR.execute("SELECT COUNT(*) FROM USER WHERE username = (?)", (username,))
+    cursorfetch = DB_CURSOR.fetchone()[0]
+    if cursorfetch == 1:
+        DB.commit()
+        DB.close()
+        return False
+    DB_CURSOR.execute("INSERT INTO USER VALUES(?, ?)", (username, password))
+    DB.commit()
+    DB.close()
+    return True
 
+def get_user(username):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    DB_CURSOR.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    cursorfetch = DB_CURSOR.fetchone()
+    return cursorfetch
+
+def check_password(username, password):
+    return password == get_user(username)[2]
+
+'''
 #posts stuff
 def add_post(post_id, pizza_id, )
 
@@ -64,8 +87,3 @@ def get_toppingsmenu():
 
 
 '''
-
-
-
-def check_password(username, password):
-    return password == get_user(username)[1]
