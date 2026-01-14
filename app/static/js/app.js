@@ -1,6 +1,13 @@
 const canvas = document.getElementById('pizzaCanvas');
 const ctx = canvas.getContext('2d');
+const toppingImgs = {};
+const toppings = ['Pepperoni', 'Pineapple', 'Ham'];
 
+toppings.forEach(item => {
+  const img = new Image()
+  img.src = '/static/img/' + item.toLowerCase() +'.png'
+  toppingImgs[item] = img
+})
 
 let pizza = {
     sauce: { name: 'None', color: '#f5deb3' }, // Default to crust color
@@ -26,14 +33,32 @@ function drawPizza() {
       ctx.fill()
     }
 
+    pizza.toppings.forEach(top =>{
+      const img = toppingImgs[top.name];
+      if(img){
+        let size = 50
+        ctx.drawImage(img, top.x - size/2, top.y - size/2, size, size);
+      }else{
+        ctx.beginPath()
+        ctx.arc(top.x, top.y, 10, 0, Math.PI * 2);
+          ctx.fillStyle = "red";
+          ctx.fill();
+      }
+    })
+
 }
 
 function setSauce(name, color) {
   // set using button, sauce name and then color in hex?. pushing to pizza
+  pizza.sauce = {name: name, color: color}
+  currentTool = null;
+  drawPizza()
 }
 
 function setTool(id, name) {
   // set using button, id should be incremental int, and then name just ingredient name
+  currentTool = {id: id, name: name}
+  console.log("Selected: " + name)
 }
 
 
