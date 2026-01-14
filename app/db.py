@@ -16,12 +16,18 @@ except:
 DB = sqlite3.connect(DB_NAME)
 DB_CURSOR = DB.cursor()
 
+# Delete tables
+DB_CURSOR.execute("DROP TABLE IF EXISTS USER;")
+DB_CURSOR.execute("DROP TABLE IF EXISTS POSTS;")
+DB_CURSOR.execute("DROP TABLE IF EXISTS SAVED_PIZZAS;")
+DB_CURSOR.execute("DROP TABLE IF EXISTS TOPPINGS_MENU;")
+
 # Create tables >>
 DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS USER(user_id INTEGER PRIMARY KEY, username TEXT, password_hash TEXT);")
-DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS POSTS(post_id INTEGER PRIMARY KEY, pizza_id INTEGER FOREIGN KEY, user_id INTEGER FOREIGN KEY, title TEXT, description TEXT, likes_count INTEGER);")
-DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(pizza_id INTEGER PRIMARY KEY, user_id INTEGER FOREIGN KEY, username TEXT, flavor_text TEXT, sauce_name TEXT);")
-DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(entry_id INTEGER PRIMARY KEY, pizza_id INTEGER FOREIGN KEY, topping_id FOREIGN KEY, locationX TEXT, locationY TEXT);")
-DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(topping_id INTEGER PRIMARY KEY, name INTEGER FOREIGN KEY, topping_id FOREIGN KEY, locationX TEXT, locationY TEXT);")
+DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS POSTS(post_id INTEGER PRIMARY KEY, pizza_id INTEGER, user_id INTEGER, title TEXT, description TEXT, likes_count INTEGER, FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id), FOREIGN KEY(user_id) REFERENCES USER(user_id));")
+DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(pizza_id INTEGER PRIMARY KEY, user_id INTEGER, username TEXT, flavor_text TEXT, sauce_name TEXT, FOREIGN KEY(user_id) REFERENCES USER(user_id));")
+DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(entry_id INTEGER PRIMARY KEY, pizza_id INTEGER, topping_id INTEGER, locationX TEXT, locationY TEXT, FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id), FOREIGN KEY(topping_id) REFERENCES TOPPINGS_MENU(topping_id));")
+DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(topping_id INTEGER PRIMARY KEY, name TEXT, description TEXT, image_url TEXT);")
 
 
 # Database functions >>
