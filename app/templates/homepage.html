@@ -16,8 +16,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
+  
+  
+  <body class="flex flex-col min-h-screen items-center text-center bg-orange-50">
   <!-- Flash Message -->
-  <body class = "flex flex-col justify-center items-center text-center">
+  <!--
     <div class = "flash w-full select-none">
     {% block content %}
     {% with messages = get_flashed_messages() %}
@@ -31,12 +34,34 @@
         </div>
         {% endif %}
     {% endwith %}
-    {% endblock %}
+    {% endblock %}x 
     </div>
+    -->
 
-    <div class="header">
-      <h1>
+    <div class="w-full flex justify-between items-center px-8 py-6 bg-orange-300/70">
+      <h1 class="text-2xl font-bold text-orange-600">
+        Pizza Time
       </h1>
+
+      {% if not logged_in %}
+      <div class="flex gap-4">
+        <a href="/login"
+           class="px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100 transition">
+          Login
+        </a>
+        <a href="/register"
+           class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">
+          Register
+        </a>
+      </div>
+      {% else %}
+      <div>
+        <a href="/logout"
+           class="px-4 py-2 rounded-lg bg-gray-200 text-black hover:bg-gray-300 transition">
+          Logout
+        </a>
+      </div>
+      {% endif %}
     </div>
 
     <div class = "middle">
@@ -51,12 +76,12 @@
     <br>
     <hr>
 
-    <div class = "footer">
+    <div class="footer mt-8 mb-6">
       <p>
-        Return to <a href= "/" class ="text-black hover:text-orange-400"> homepage</a><br>
+        Return to <a href="/" class="text-black hover:text-orange-400">homepage</a><br>
       </p>
       <p>
-        To draw <a href= "/canvas" class ="text-black hover:text-orange-400"> homepage</a><br>
+        To draw <a href="/canvas" class="text-black hover:text-orange-400">homepage</a><br>
       </p>
     </div>
 
