@@ -40,34 +40,45 @@
     </div>
     <canvas id="pizzaCanvas" width="500" height="500" class="border-4 border-orange-100 rounded-full bg-white cursor-crosshair">></canvas>
 
-    <div id="controls" class="w-full max-w-2xl mt-8 px-4">
+    <div id="controls" class="w-full max-w-2xl mt-8 px-4 space-y-10">
 
-      <section>
-        <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">S A U C E</h3>
+      <section class = "space-y-5">
+        <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">S A U C E...</h3>
         <div class="sauce-group flex justify-center gap-20">
+          
           <button onclick="setSauce('Tomato', '#FF6347')" class="pizza-tool-btn">
             <p>Tomato</p>
-            <div class="w-10 h-10 rounded-full bg-[#FF6347]"></div>
+            <div class="w-16 h-16 rounded-full bg-[#FF6347]"></div>
           </button>
 
           <button onclick="setSauce('Pesto', '#90EE90')" class="pizza-tool-btn">
             <p>Pesto</p>
-            <div class="w-10 h-10 rounded-full bg-[#90EE90]"></div>
+            <div class="w-16 h-16 rounded-full bg-[#90EE90]"></div>
           </button>
 
           <button onclick="setSauce('Alfredo', '#FFFDD0')" class="pizza-tool-btn">
             <p>Alfredo</p>
-            <div class="w-10 h-10 rounded-full bg-[#FFFDD0]"></div>
+            <div class="w-16 h-16 rounded-full bg-[#FFFDD0]"></div>
           </button>
         </div>
       </section>
+      <hr>
+      <section class = "space-y-14">
+        <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">T O P P I N G S...</h3>
+        <div class="topping-group flex justify-center gap-20 text-2xl ">
+          <button onclick="setTool(1, 'Pepperoni')" class="pizza-tool-btn">
+            <img src="/static/img/pepperoni.png" class="w-20 h-20 translate-x-4">
+          </button>
 
-        <div class="topping-group">
-            <h3>2. Pick Topping</h3>
-            <button onclick="setTool(1, 'Pepperoni')">Pepperoni</button>
-            <button onclick="setTool(2, 'Pineapple')">Pinapple</button>
-            <button onclick="setTool(3, 'Ham')">Ham</button>
+          <button onclick="setTool(2, 'Pineapple')" class="pizza-tool-btn">
+            <img src="/static/img/pineapple.png" class="w-20 h-20 translate-x-3">
+          </button>
+
+          <button onclick="setTool(3, 'Ham')" class="pizza-tool-btn ">
+            <img src="/static/img/ham.png" class="w-24 h-24">
+          </button>
         </div>
+      </section>
     </div>
 
     <button onclick="savePizza()" class="mt-4 px-4 py-2 rounded">Done</button>
