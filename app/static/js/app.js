@@ -15,11 +15,10 @@ let pizza = {
 };
 
 let currentTool = null;
+let mouse = { x: 0, y: 0, isOver: false };
 
 function drawPizza() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-
 
     ctx.beginPath();
     ctx.arc(250, 250, 250, Math.PI, -Math.PI)
@@ -45,6 +44,20 @@ function drawPizza() {
           ctx.fill();
       }
     })
+
+    if (currentTool && mouse.isOver) {
+      const ghostImg = toppingImgs[currentTool.name];
+      
+      if(ghostImg && ghostImg.complete) {
+        ctx.save();
+        ctx.globalAlpha = 0.5;
+        let size = 75;
+
+        ctx.drawImage(ghostImg, mouse.x - size/2, mouse.y - size/2, size, size);
+        
+        ctx.restore(); 
+      }
+    }
 
 }
 
@@ -109,6 +122,19 @@ async function savePizza() {
   }
 }
 
+canvas.addEventListener('mousemove', (evt) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = evt.clientX - rect.left;
+    mouse.y = evt.clientY - rect.top;
+    mouse.isOver = true;
+    
+    drawPizza();
+});
+
+canvas.addEventListener('mouseleave', () => {
+    mouse.isOver = false;
+    drawPizza();
+});
 
 canvas.addEventListener('mousedown', (evt) => {
     if (!currentTool) return; // do nothing if no topping selected
