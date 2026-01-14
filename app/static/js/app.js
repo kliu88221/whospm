@@ -61,6 +61,10 @@ function setTool(id, name) {
   console.log("Selected: " + name)
 }
 
+function savePizza(){
+  const data = JSON.stringify(pizza)
+}
+
 
 canvas.addEventListener('mousedown', (evt) => {
     if (!currentTool) return; // do nothing if no topping selected
@@ -79,5 +83,7 @@ canvas.addEventListener('mousedown', (evt) => {
 
     drawPizza();
 });
+
+
 
 drawPizza();
