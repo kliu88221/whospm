@@ -18,3 +18,8 @@ junjieL -- 1/14/26 8:45pm
 - Add pizza saving function
 - toppings_menu db now has the 3 toppings
 - save button should work after login is done (question mark?)
+
+junjieL -- 1/14/26 9:15pm
+- login and register from our inspiration
+- tiny fix in db for get_user
+- made the path after login canvas for now

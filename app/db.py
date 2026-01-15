@@ -108,8 +108,9 @@ def get_user(username):
     DB_NAME = "Data/database.db"
     DB = sqlite3.connect(DB_NAME)
     DB_CURSOR = DB.cursor()
-    DB_CURSOR.execute("SELECT * FROM Users WHERE username = ?", (username,))
+    DB_CURSOR.execute("SELECT * FROM USER WHERE username = ?", (username,))
     cursorfetch = DB_CURSOR.fetchone()
+    DB.close()
     return cursorfetch
 
 def check_password(username, password):

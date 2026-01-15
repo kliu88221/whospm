@@ -10,7 +10,7 @@ Inspr: snorelacks
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snorelacks - Login</title>
+    <title>whospm - Login</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
@@ -35,11 +35,12 @@ Inspr: snorelacks
 
 <body class="h-screen overflow-hidden text-white relative">
 
+  <!--
   <div class="absolute inset-0 z-0">
     <div class="absolute inset-0 bg-black/60 z-10"></div>
     <img src="static/images/city.jpg"  alt="City Background" class="w-full h-full object-cover">
   </div>
-
+  -->
 
   <div class="relative z-20 h-full flex flex-col justify-center items-center px-4">
 
@@ -48,8 +49,8 @@ Inspr: snorelacks
       <h2 class="text-3xl mb-2 text-white">Welcome Back!</h2>
       <p class="text-gray-400 mb-8">You have already logged in.</p>
       
-      <a href="/" class="block w-full btn-primary py-3 rounded-xl text-center">
-        View Profile
+      <a href="/canvas" class="block w-full btn-primary py-3 rounded-xl text-center">
+        View canvas
       </a>
     </div>
 
@@ -58,14 +59,14 @@ Inspr: snorelacks
           
     <div class="text-center">
       <h1 class="text-4xl font-bold tracking-wider">
-        <span class="text-blue-400">USER </span>LOGIN
+        <span class="text-yellow-400">USER </span>LOGIN
       </h1>
-        <p class="text-blue-200/60 mt-2 text-xs uppercase tracking-widest">Into an existing account</p>
+        <p class="text-yellow-200/60 mt-2 text-xs uppercase tracking-widest">Into an existing account</p>
     </div>
 
     <form action="/login" method="POST" class="flex flex-col gap-5">
       <div class="flex flex-col gap-1">
-        <label class="text-xs text-blue-300 uppercase ml-1 required">Username</label>
+        <label class="text-xs text-yellow-300 uppercase ml-1 required">Username</label>
         <input type="text" 
           name="username" 
           placeholder="Enter Username..." 
@@ -74,7 +75,7 @@ Inspr: snorelacks
       </div>
 
       <div class="flex flex-col gap-1">
-        <label class="text-xs text-blue-300 uppercase ml-1 required">Password</label>
+        <label class="text-xs text-yellow-300 uppercase ml-1 required">Password</label>
         <input type="password" 
           name="password" 
           placeholder="Enter Password..." 
@@ -90,7 +91,7 @@ Inspr: snorelacks
     <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
       <p class="mb-4">
         New User? 
-        <a href="/register" class="text-blue-400 font-bold hover:text-white transition-colors">
+        <a href="/register" class="text-yellow-400 font-bold hover:text-white transition-colors">
           Register Here!
         </a>
       </p>

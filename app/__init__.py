@@ -72,7 +72,7 @@ def login():
         flash(f"Login Successful! Welcome back, {user}.")
         
         session['username'] = user
-        return redirect(url_for('profile'))
+        return redirect(url_for('canvas'))
     return render_template("login.html")
 
 @app.route("/logout") # link jinja template to this route via button
