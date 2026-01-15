@@ -41,44 +41,45 @@
     <canvas id="pizzaCanvas" width="500" height="500" class="border-4 border-orange-100 rounded-full bg-white cursor-crosshair">></canvas>
 
     <div id="controls" class="w-full max-w-2xl mt-8 px-4 space-y-10">
-
       <section class = "space-y-5">
         <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">S A U C E...</h3>
         <div class="flex justify-center gap-20" id="sauce-group">
-          
-          <button onclick="setSauce('Tomato', '#FF6347')" class="pizza-tool-btn">
+          <button onclick="setSauce('Tomato', '#FF6347', this)" class="sauce-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
             <p>Tomato</p>
             <div class="w-16 h-16 rounded-full bg-[#FF6347]"></div>
           </button>
 
-          <button onclick="setSauce('Pesto', '#90EE90')" class="pizza-tool-btn">
+          <button onclick="setSauce('Pesto', '#90EE90', this)" class="sauce-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
             <p>Pesto</p>
             <div class="w-16 h-16 rounded-full bg-[#90EE90]"></div>
           </button>
 
-          <button onclick="setSauce('Alfredo', '#FFFDD0')" class="pizza-tool-btn">
+          <button onclick="setSauce('Alfredo', '#FFFDD0', this)" class="sauce-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
             <p>Alfredo</p>
             <div class="w-16 h-16 rounded-full bg-[#FFFDD0]"></div>
           </button>
         </div>
       </section>
+
       <hr>
+
       <section class = "space-y-14">
         <h3 class="text-4xl font-bold text-gray-700 mb-4 select-none">T O P P I N G S...</h3>
         <div class="flex justify-center gap-20 text-2xl " id="topping-group">
-          <button onclick="setTool(1, 'Pepperoni')" class="pizza-tool-btn">
-            <img src="/static/img/pepperoni.png" class="w-20 h-20 translate-x-4">
+          <button onclick="setTool(1, 'Pepperoni', this)" class="topping-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
+            <img src="/static/img/pepperoni.png" class="w-20 h-20">
           </button>
 
-          <button onclick="setTool(2, 'Pineapple')" class="pizza-tool-btn">
-            <img src="/static/img/pineapple.png" class="w-20 h-20 translate-x-3">
+          <button onclick="setTool(2, 'Pineapple', this)" class="topping-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
+            <img src="/static/img/pineapple.png" class="w-20 h-20">
           </button>
 
-          <button onclick="setTool(3, 'Ham')" class="pizza-tool-btn ">
+          <button onclick="setTool(3, 'Ham', this)" class="topping-btn pizza-tool-btn transition-transform duration-200 hover:-translate-y-2">
             <img src="/static/img/ham.png" class="w-24 h-24">
           </button>
         </div>
       </section>
+
     </div>
 
     <button onclick="savePizza()" id="saveBtn" class="text-4xl mt-8 px-10 py-4 font-black transition active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">

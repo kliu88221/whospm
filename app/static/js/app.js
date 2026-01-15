@@ -62,17 +62,30 @@ function drawPizza() {
 
 }
 
-function setSauce(name, color) {
+function uiSetActive(element, groupClass) {
+  document.querySelectorAll('.' + groupClass).forEach(btn => {
+    btn.classList.remove('-translate-y-4', 'scale-110', 'ring-4', 'ring-orange-200', 'rounded-full');
+  });
+  if(element) {
+    element.classList.add('-translate-y-4', 'scale-110', 'ring-4', 'ring-orange-200', 'rounded-full');
+  }
+}
+
+
+function setSauce(name, color, el) {
   // set using button, sauce name and then color in hex?. pushing to pizza
   pizza.sauce = {name: name, color: color}
+  uiSetActive(el, 'sauce-btn');
   currentTool = null;
+  uiSetActive(null, 'topping-btn');
   isSaved = false;
   drawPizza()
 }
 
-function setTool(id, name) {
+function setTool(id, name, el) {
   // set using button, id should be incremental int, and then name just ingredient name
   currentTool = {id: id, name: name}
+  uiSetActive(el, 'topping-btn');
   console.log("Selected: " + name)
 }
 
