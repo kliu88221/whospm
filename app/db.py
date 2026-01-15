@@ -21,6 +21,7 @@ DB_CURSOR.execute("DROP TABLE IF EXISTS USER;")
 DB_CURSOR.execute("DROP TABLE IF EXISTS POSTS;")
 DB_CURSOR.execute("DROP TABLE IF EXISTS SAVED_PIZZAS;")
 DB_CURSOR.execute("DROP TABLE IF EXISTS TOPPINGS_MENU;")
+#DB_CURSOR.execute("DROP TABLE IF EXISTS PIZZA_TOPPINGS;")
 
 # Create tables >>
 #DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS USER(user_id INTEGER PRIMARY KEY, username TEXT, password_hash TEXT);")
@@ -118,14 +119,41 @@ def check_password(username, password):
 
 
 #posts stuff
-def add_post(post_id, pizza_id, username, title, description, likes_count):
+def create_post(username, pizza_id, title, description):
     DB_NAME = "Data/database.db"
     DB = sqlite3.connect(DB_NAME)
     DB_CURSOR = DB.cursor()
-    DB_CURSOR.execute("INSERT INTO POSTS(?, ?, ?, ?, ?, ?)", (post_id, pizza_id, username, title, description, likes_count))
+    #check to see if pizza belongs to the user
+    DB_CURSOR.execute("SELECT 1 FROM SAVED_PIZZAS WHERE pizza_id = ? AND username = ?", (pizza_id, username))
+    row = DB_CURSOR.fetchone()
+    if row is None:
+        DB.close()
+        return False
+    #add post
+    DB_CURSOR.execute("INSERT INTO POSTS (pizza_id, username, title, description, likes_count) VALUES (?, ?, ?, ?, ?)", (pizza_id, username, title, description, 0))
     DB.commit()
     DB.close()
     return True
+
+#return dictionary of post information
+def get_post(post_id):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+
+    post = DB_CURSOR.execute("SELECT post_id, pizza_id, username, title, description, likes_count FROM POSTS WHERE post_id = ?", (post_id,)).fetchone()
+    if post is None:
+        return None
+
+    pizza = get_pizza(post[1])
+    return {
+        "post_id": post[0],
+        "username": post[2],
+        "title": post[3],
+        "description": post[4],
+        "likes_count": post[5],
+        "pizza": pizza
+    }
 
 #pizza stuff
 def save_pizza(username, sauce_name, sauce_color, toppings_list):
@@ -140,6 +168,54 @@ def save_pizza(username, sauce_name, sauce_color, toppings_list):
     DB.commit()
     DB.close()
     return pizza_id
+
+#return dictionary of pizza info with toppings
+def get_pizza(pizza_id):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+
+    #check if pizza_id is valid
+    pizza = DB_CURSOR.execute("SELECT pizza_id, username, flavor_text, sauce_name, sauce_color FROM SAVED_PIZZAS WHERE pizza_id = ?", (pizza_id,)).fetchone()
+    if pizza is None:
+        db.close()
+        return False
+
+    toppings = DB_CURSOR.execute(
+    """ SELECT
+        pt.entry_id,
+        pt.topping_id,
+        tm.name,
+        tm.image_url,
+        pt.locationX,
+        pt.locationY
+        FROM PIZZA_TOPPINGS pt
+        JOIN TOPPINGS_MENU tm
+        ON pt.topping_id = tm.topping_id
+        WHERE pt.pizza_id = ?
+        """,
+        (pizza_id,)
+    ).fetchall()
+    db.close()
+
+    return {
+        "pizza_id": pizza[0],
+        "username": pizza[1],
+        "flavor_text": pizza[2],
+        "sauce_name": pizza[3],
+        "sauce_color": pizza[4],
+        "toppings": [
+            {
+                "entry_id": t[0],
+                "topping_id": t[1],
+                "name": t[2],
+                "image_url": t[3],
+                "x": t[4],
+                "y": t[5]
+            }
+            for t in toppings
+        ]
+    }
 
 '''
 def edit_post(post_id, ):
