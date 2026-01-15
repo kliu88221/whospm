@@ -14,7 +14,7 @@ Inspr: snorelacks
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/app.css') }}">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -48,7 +48,7 @@ Inspr: snorelacks
     <div class="bg-black backdrop-blur-xl border border-white/10 p-10 rounded-2xl text-center max-w-md w-full shadow-2xl">
       <h2 class="text-3xl mb-2 text-white">Welcome Back!</h2>
       <p class="text-gray-400 mb-8">You have already logged in.</p>
-      
+
       <a href="/canvas" class="block w-full btn-primary py-3 rounded-xl text-center">
         View canvas
       </a>
@@ -56,7 +56,7 @@ Inspr: snorelacks
 
     {% else %}
     <div class="bg-black backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl w-full max-w-md flex flex-col gap-6">
-          
+
     <div class="text-center">
       <h1 class="text-4xl font-bold tracking-wider">
         <span class="text-yellow-400">USER </span>LOGIN
@@ -67,18 +67,18 @@ Inspr: snorelacks
     <form action="/login" method="POST" class="flex flex-col gap-5">
       <div class="flex flex-col gap-1">
         <label class="text-xs text-yellow-300 uppercase ml-1 required">Username</label>
-        <input type="text" 
-          name="username" 
-          placeholder="Enter Username..." 
+        <input type="text"
+          name="username"
+          placeholder="Enter Username..."
           class="search-input w-full text-black p-3 rounded-xl"
           required>
       </div>
 
       <div class="flex flex-col gap-1">
         <label class="text-xs text-yellow-300 uppercase ml-1 required">Password</label>
-        <input type="password" 
-          name="password" 
-          placeholder="Enter Password..." 
+        <input type="password"
+          name="password"
+          placeholder="Enter Password..."
           class="search-input w-full text-black p-3 rounded-xl"
           required>
       </div>
@@ -90,7 +90,7 @@ Inspr: snorelacks
 
     <div class="text-center text-sm pt-4 border-t border-white/10 text-gray-400">
       <p class="mb-4">
-        New User? 
+        New User?
         <a href="/register" class="text-yellow-400 font-bold hover:text-white transition-colors">
           Register Here!
         </a>
