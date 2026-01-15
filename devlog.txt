@@ -13,3 +13,8 @@ Yul -- 1/13/26 6:00am
 Yul -- 1/14/26 6:00am
 - reformatted canvas, added prelim for saving pizza to db (by fetch as POST to flask function)
 - better visuals added small ghosting to preview ingredient location, fixed ingredients and uses images from static/img now
+
+junjieL -- 1/14/26 8:45pm
+- Add pizza saving function
+- toppings_menu db now has the 3 toppings
+- save button should work after login is done (question mark?)

@@ -75,7 +75,7 @@ function setTool(id, name) {
 }
 
 async function savePizza() {
-  const saveButton = document.getElementById('save');
+  const saveButton = document.getElementById('saveBtn');
   const originalText = saveButton.innerText; 
   const payload = JSON.stringify(pizza);
 

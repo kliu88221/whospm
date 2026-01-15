@@ -106,8 +106,15 @@ def save_pizza_api():
     
     if 'username' not in session:
         return {"status": "error", "message": "Not logged in"}, 401
-
-    return {"status": "success", "message": "Pizza saved!"}, 200
+    
+    username = session.get('username')
+    sauce_name = data['sauce']['name']
+    sauce_color = data['sauce']['color']
+    toppings = data['toppings']
+    
+    pizza_id = db.save_pizza(username, sauce_name, sauce_color, toppings)
+    
+    return {"status": "success", "message": "Pizza saved!", "pizza_id": pizza_id}, 200
 
 if __name__ == "__main__":
     app.debug = True

@@ -27,7 +27,7 @@ DB_CURSOR.execute("DROP TABLE IF EXISTS TOPPINGS_MENU;")
 #DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS POSTS(post_id INTEGER PRIMARY KEY, pizza_id INTEGER, user_id INTEGER, title TEXT, description TEXT, likes_count INTEGER, FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id), FOREIGN KEY(user_id) REFERENCES USER(user_id));")
 #DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(pizza_id INTEGER PRIMARY KEY, user_id INTEGER, username TEXT, flavor_text TEXT, sauce_name TEXT, FOREIGN KEY(user_id) REFERENCES USER(user_id));")
 #DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(entry_id INTEGER PRIMARY KEY, pizza_id INTEGER, topping_id INTEGER, locationX TEXT, locationY TEXT, FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id), FOREIGN KEY(topping_id) REFERENCES TOPPINGS_MENU(topping_id));")
-#DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(topping_id INTEGER PRIMARY KEY, name TEXT, description TEXT, image_url TEXT);")
+#DB_CURSOR.execute("CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(topping_id INTEGER PRIMARY KEY, name TEXT, description TEXT, image_path TEXT);")
 
 
 
@@ -51,6 +51,7 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(
                     username TEXT,
                     flavor_text TEXT,
                     sauce_name TEXT,
+                    sauce_color TEXT,
                     FOREIGN KEY(username) REFERENCES USER(username));""")
 
 DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(
@@ -69,6 +70,23 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(
                     image_url TEXT);""")
 
 
+DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+                  1,
+                  'Pepperoni',
+                  'salty too oily yum yum red circles',
+                  '/static/img/pepperoni.png');""")
+DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+                  2,
+                  'Pineapple',
+                  'sweet yellow chunks. do they belong here?',
+                  '/static/img/pineapple.png');""")
+DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+                  3,
+                  'Ham',
+                  'non circle salty yum yums',
+                  '/static/img/ham.png');""")
+DB.commit()
+DB.close()
 # Database functions >>
 #user stuff
 def add_user(username, password):
@@ -107,6 +125,21 @@ def add_post(post_id, pizza_id, username, title, description, likes_count):
     DB.commit()
     DB.close()
     return True
+
+#pizza stuff
+def save_pizza(username, sauce_name, sauce_color, toppings_list):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    flavor_text = "Is this what makes the best pizza maker?" #we can add a user input for this later and make this the base msg
+    DB_CURSOR.execute("INSERT INTO SAVED_PIZZAS (username, flavor_text, sauce_name, sauce_color) VALUES (?, ?, ?, ?)", (username, flavor_text, sauce_name, sauce_color))
+    pizza_id = DB_CURSOR.lastrowid
+    for topping in toppings_list:
+        DB_CURSOR.execute("INSERT INTO PIZZA_TOPPINGS (pizza_id, topping_id, locationX, locationY) VALUES (?, ?, ?, ?)", (pizza_id, topping['id'], str(topping['x']), str(topping['y'])))
+    DB.commit()
+    DB.close()
+    return pizza_id
+
 '''
 def edit_post(post_id, ):
 
