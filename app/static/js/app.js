@@ -16,6 +16,7 @@ let pizza = {
 
 let currentTool = null;
 let mouse = { x: 0, y: 0, isOver: false };
+let isSaved = true;
 
 function drawPizza() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -65,6 +66,7 @@ function setSauce(name, color) {
   // set using button, sauce name and then color in hex?. pushing to pizza
   pizza.sauce = {name: name, color: color}
   currentTool = null;
+  isSaved = false;
   drawPizza()
 }
 
@@ -75,6 +77,10 @@ function setTool(id, name) {
 }
 
 async function savePizza() {
+  if (isSaved) {
+    alert("No changes to save!");
+    return;
+  }
   const saveButton = document.getElementById('saveBtn');
   const originalText = saveButton.innerText; 
   const payload = JSON.stringify(pizza);
@@ -92,6 +98,7 @@ async function savePizza() {
     const ret = await response.json();
 
     if (response.ok && ret.status === "success") {
+      isSaved = true;
       // window.location.href = "/profile";
       setTimeout(() => {
         saveBtn.innerText = originalText;
@@ -151,6 +158,7 @@ canvas.addEventListener('mousedown', (evt) => {
         y: y
     });
 
+    isSaved = false;
     drawPizza();
 });
 
