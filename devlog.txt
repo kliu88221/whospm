@@ -10,9 +10,20 @@ Yul -- 1/13/26 6:00am
 - blueprints for canvas
 - added design doc upates
 
+junjieL -- 1/13/26 11:00am 
+- started building database in db.py
+- created tables and brainstormed required functions
+
+emilyM -- 1/13/26 11:00am 
+- worked with Jun Jie on building database and making functions
+
 Yul -- 1/14/26 6:00am
 - reformatted canvas, added prelim for saving pizza to db (by fetch as POST to flask function)
 - better visuals added small ghosting to preview ingredient location, fixed ingredients and uses images from static/img now
+
+emilyM -- 1/14/26 4:55pm
+- edited table columns in database
+- worked on adding post function
 
 junjieL -- 1/14/26 8:45pm
 - Add pizza saving function
@@ -23,3 +34,7 @@ junjieL -- 1/14/26 9:15pm
 - login and register from our inspiration
 - tiny fix in db for get_user
 - made the path after login canvas for now
+
+emilyM -- 1/15/26 7:30am
+- edited creating post db function
+- made get_post and get_pizza db functions
