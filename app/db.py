@@ -217,6 +217,25 @@ def get_pizza(pizza_id):
         ]
     }
 
+def get_pizza_all():
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    
+    DB_CURSOR.execute("SELECT pizza_id FROM SAVED_PIZZAS ORDER BY pizza_id DESC")
+    rows = DB_CURSOR.fetchall()
+    DB.close()
+    
+    results = []
+    if rows:
+        for p in rows:
+            pizza = get_pizza(p[0]) 
+            if pizza:
+                results.append(pizza)
+    return results
+
+
+
 '''
 def edit_post(post_id, ):
 

@@ -32,16 +32,7 @@ def user_context(): # persistent info made avalible for all html templates
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
     flash("Welcome to Whospm!")
-    x = 1
-    results = []
-    while(True):
-        ret = db.get_pizza(x)
-        print(ret)
-        if(ret):
-            results.append(ret)
-            x += 1
-        else:
-            break
+    results = db.get_pizza_all()
     return render_template("homepage.html", results=results)
 
 @app.route("/register", methods=['GET', 'POST'])
