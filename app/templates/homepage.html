@@ -16,8 +16,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  
-  
+
+
   <body class="flex flex-col min-h-screen items-center text-center bg-orange-50">
   <!-- Flash Message -->
   <!--
@@ -34,7 +34,7 @@
         </div>
         {% endif %}
     {% endwith %}
-    {% endblock %}x 
+    {% endblock %}x
     </div>
     -->
 
@@ -83,6 +83,20 @@
       <p>
         To draw <a href="/canvas" class="text-black hover:text-orange-400">homepage</a><br>
       </p>
+    </div>
+
+    <div class "pizzas">
+      <!-- {% for post in posts %}-->
+      <canvas id="pizza-{{ post.post_id }}" width="500" height="500"></canvas>
+      <script>
+      const canvas = document.getElementById("pizza-{{ post.post_id }}");
+      const ctx = canvas.getContext("2d");
+
+      const pizza = {{ post.pizza | tojson }};
+
+      drawPizza2(pizza);
+      </script>
+      <!--{% endfor %}-->
     </div>
 
   </body>

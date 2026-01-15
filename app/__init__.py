@@ -12,9 +12,9 @@ import pprint
 import os
 import re
 
-# Initialize DB >> 
+# Initialize DB >>
 
-# Create instance of Flask app >> 
+# Create instance of Flask app >>
 app = Flask(__name__)
 app.secret_key = "ABCEDFGHIJKLMNOPQRSTUVWXYZ1234567890987654321"
 
@@ -32,7 +32,7 @@ def user_context(): # persistent info made avalible for all html templates
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
     flash("Welcome to Whospm!")
-    return render_template("homepage.html")
+    return render_template("homepage.html", post = db.get_post(1))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -70,7 +70,7 @@ def login():
             flash("Username or password is not correct!")
             return redirect(url_for('login'))
         flash(f"Login Successful! Welcome back, {user}.")
-        
+
         session['username'] = user
         return redirect(url_for('canvas'))
     return render_template("login.html")
@@ -88,9 +88,9 @@ def profile():
     if (not user):
         flash("You are not logged in!")
         return redirect(url_for('login'))
-    
+
     db_user = db.get_user(user)
-    
+
     return render_template("profile.html", db_user = db_user)
 
 @app.route("/canvas", methods=['GET', 'POST'])
@@ -101,19 +101,19 @@ def canvas():
 @app.route('/db/save_pizza', methods=['POST'])
 def save_pizza_api():
     data = request.get_json()
-    
+
     print("Received Pizza Data:", data)
-    
+
     if 'username' not in session:
         return {"status": "error", "message": "Not logged in"}, 401
-    
+
     username = session.get('username')
     sauce_name = data['sauce']['name']
     sauce_color = data['sauce']['color']
     toppings = data['toppings']
-    
+
     pizza_id = db.save_pizza(username, sauce_name, sauce_color, toppings)
-    
+    db.create_post(username, pizza_id, "blank title", "a pizza yay!")
     return {"status": "success", "message": "Pizza saved!", "pizza_id": pizza_id}, 200
 
 if __name__ == "__main__":

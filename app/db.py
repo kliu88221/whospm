@@ -178,7 +178,7 @@ def get_pizza(pizza_id):
     #check if pizza_id is valid
     pizza = DB_CURSOR.execute("SELECT pizza_id, username, flavor_text, sauce_name, sauce_color FROM SAVED_PIZZAS WHERE pizza_id = ?", (pizza_id,)).fetchone()
     if pizza is None:
-        db.close()
+        DB.close()
         return False
 
     toppings = DB_CURSOR.execute(
@@ -196,7 +196,7 @@ def get_pizza(pizza_id):
         """,
         (pizza_id,)
     ).fetchall()
-    db.close()
+    DB.close()
 
     return {
         "pizza_id": pizza[0],

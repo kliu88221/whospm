@@ -48,18 +48,52 @@ function drawPizza() {
 
     if (currentTool && mouse.isOver) {
       const ghostImg = toppingImgs[currentTool.name];
-      
+
       if(ghostImg && ghostImg.complete) {
         ctx.save();
         ctx.globalAlpha = 0.5;
         let size = 75;
 
         ctx.drawImage(ghostImg, mouse.x - size/2, mouse.y - size/2, size, size);
-        
-        ctx.restore(); 
+
+        ctx.restore();
       }
     }
 
+}
+
+function drawPizza2(pizza) {
+    // Clear canvas
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    // Draw crust
+    ctx.beginPath();
+    ctx.arc(250, 250, 250, 0, Math.PI * 2);
+    ctx.fillStyle = "#f5deb3";
+    ctx.fill();
+
+    // Draw sauce
+    if (pizza.sauce_name && pizza.sauce_name != "None") {
+        ctx.beginPath();
+        ctx.arc(250, 250, 225, 0, Math.PI * 2);
+        ctx.fillStyle = pizza.sauce_color;
+        ctx.fill();
+    }
+
+    // Draw toppings
+    pizza.toppings.forEach(top => {
+        const img = toppingImgs[top.name]; // preloaded
+        const size = 75;
+        if (img && img.complete) {
+            ctx.drawImage(img, top.x - size/2, top.y - size/2, size, size);
+        } else {
+            // fallback red circle
+            ctx.beginPath();
+            ctx.arc(top.x, top.y, 10, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+        }
+    });
 }
 
 function uiSetActive(element, groupClass) {
@@ -95,7 +129,7 @@ async function savePizza() {
     return;
   }
   const saveButton = document.getElementById('saveBtn');
-  const originalText = saveButton.innerText; 
+  const originalText = saveButton.innerText;
   const payload = JSON.stringify(pizza);
 
   saveBtn.innerText = "Saving...";
@@ -147,7 +181,7 @@ canvas.addEventListener('mousemove', (evt) => {
     mouse.x = evt.clientX - rect.left;
     mouse.y = evt.clientY - rect.top;
     mouse.isOver = true;
-    
+
     drawPizza();
 });
 
