@@ -76,7 +76,7 @@
       </p>
       {% for pizza in results %}
       <div class="pizza-container bg-white overflow-hidden flex flex-col items-center p-8"
-          data-pizza="{{ pizza | tojson | forceescape }}">
+        data-pizza="{{ pizza | tojson | forceescape }}">
 
         <canvas width="500" height="500" class="w-64 h-64 border-4 border-orange-100 rounded-full bg-white"></canvas>
         
