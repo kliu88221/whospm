@@ -37,6 +37,21 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS USER(
                     username TEXT PRIMARY KEY,
                     password TEXT);""")
 
+DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(
+                    topping_id INTEGER PRIMARY KEY,
+                    name TEXT,
+                    description TEXT,
+                    image_url TEXT);""")
+
+DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(
+                    pizza_id INTEGER PRIMARY KEY,
+                    username TEXT,
+                    flavor_text TEXT,
+                    sauce_name TEXT,
+                    sauce_color TEXT,
+                    FOREIGN KEY(username) REFERENCES USER(username));""")
+
+
 DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS POSTS(
                     post_id INTEGER PRIMARY KEY,
                     pizza_id INTEGER,
@@ -47,13 +62,6 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS POSTS(
                     FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id),
                     FOREIGN KEY(username) REFERENCES USER(username));""")
 
-DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(
-                    pizza_id INTEGER PRIMARY KEY,
-                    username TEXT,
-                    flavor_text TEXT,
-                    sauce_name TEXT,
-                    sauce_color TEXT,
-                    FOREIGN KEY(username) REFERENCES USER(username));""")
 
 DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(
                     entry_id INTEGER PRIMARY KEY,
@@ -64,24 +72,19 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(
                     FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id),
                     FOREIGN KEY(topping_id) REFERENCES TOPPINGS_MENU(topping_id));""")
 
-DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(
-                    topping_id INTEGER PRIMARY KEY,
-                    name TEXT,
-                    description TEXT,
-                    image_url TEXT);""")
 
-
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+# wtf lol
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   1,
                   'Pepperoni',
                   'salty too oily yum yum red circles',
                   '/static/img/pepperoni.png');""")
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   2,
                   'Pineapple',
                   'sweet yellow chunks. do they belong here?',
                   '/static/img/pineapple.png');""")
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   3,
                   'Ham',
                   'non circle salty yum yums',
