@@ -5,7 +5,6 @@ YuL -- 1/11/26 10:45am
 Yul -- 1/11/26 11:30am
 - Added blueprints for templates (profile login homepage register) and Flask routes
 
-
 Yul -- 1/13/26 6:00am
 - blueprints for canvas
 - added design doc upates
@@ -38,3 +37,7 @@ junjieL -- 1/14/26 9:15pm
 emilyM -- 1/15/26 7:30am
 - edited creating post db function
 - made get_post and get_pizza db functions
+
+Yul -- 1/15/26 11:00Pm
+- added more ingredients and sauces
+- upated jinja template to dynamically draw new canvas (pizza posts) based on data stored in db during pizza creation (and added small functions to parse pizza dat from db)
