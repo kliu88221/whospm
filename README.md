@@ -1,7 +1,7 @@
 # Pizza Time by <b>whospm</b>
 
 **Kyle Liu** -  Project Manager <br>
-handle templates + site design with TailwindCss/Jinja/Js<br>
+handle templates + site design with TailwindCss, link html with jinja for conditional rendering of templates, ensure style is consistent<br>
 <br>
 **Jun Jie Li** -  Middleware <br>
 implements Flask application + updating page logic and routing <br>
@@ -10,7 +10,7 @@ implements Flask application + updating page logic and routing <br>
 builds and maintains Sqlite database + integration with middleware<br>
 <br>
 **Yu Lu** - Front-end <br>
-handle templates + site design with TailwindCss/Jinja/Js<br>
+handle canvas, js to decorate pizza, handle ingredient interactions<br>
 <br>
 
 # Description:
