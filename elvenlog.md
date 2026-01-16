@@ -11,3 +11,7 @@ jinja can potentiaslly create multiple divs and canvases because of my for loop,
 jinja json passed only partly rendering
 
 single quotes in json breaking html
+
+pass json content thorugh a data-* is better option when dealing with json content in this case, over access using .dataset in js?
+
+75 by 75 canvas, provide drawImage offset formula
