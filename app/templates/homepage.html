@@ -39,18 +39,23 @@
     -->
 
     <div class="w-full flex justify-between items-center px-8 py-6 bg-orange-300/70">
-      <h1 class="text-2xl font-bold text-orange-600">
-        Pizza Time
+      <h1 class="text-2xl font-bold text-orange-600 select-none">
+        Pizza Time!
       </h1>
+
+      <a href="/canvas"
+          class="text-2xl font-bold absolute left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg border border-white-400 text-white-500 hover:bg-orange-100">
+          NEW PIZZA
+        </a>
 
       {% if not logged_in %}
       <div class="flex gap-4">
         <a href="/login"
-           class="px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100 transition">
+           class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">
           Login
         </a>
         <a href="/register"
-           class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">
+           class="px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100">
           Register
         </a>
       </div>
@@ -64,10 +69,26 @@
       {% endif %}
     </div>
 
-    <div class = "middle">
-      {%for pizza in results %}
-      <div class="post_content">
-        <p>{{ pizza['pizza_id']|safe }}</p> <!--Removed safety checks, allowing body to accept html formatting-->
+    <div class="middle grid grid-cols-1 gap-6 p-8">
+      <img src="/static/img/logo.png" class="max-w-4xl h-auto">
+      <p class="absolute left-1/4 -translate-y-1/9 text-xs italic text-gray-400 mt-2 px-4 select-none">
+        Ayo the pizza here?
+      </p>
+      {% for pizza in results %}
+      <div class="pizza-container bg-white overflow-hidden flex flex-col items-center p-8"
+          data-pizza="{{ pizza | tojson | forceescape }}">
+
+        <canvas width="500" height="500" class="w-64 h-64 border-4 border-orange-100 rounded-full bg-white"></canvas>
+        
+        <div class="info mt-4 text-center">
+          <p class="font-bold">Pizza #{{ pizza.pizza_id }}</p>
+          <p class="italic text-sm text-orange-500">Chef: {{ pizza.username }}</p>
+        </div>
+
+        <p class="text-xs italic text-gray-400 mt-2 px-4">
+          "{{ pizza.flavor_highlight }}"
+        </p>
+
       </div>
       {% endfor %}
     </div>
@@ -78,13 +99,10 @@
 
     <div class="footer mt-8 mb-6">
       <p>
-        Return to <a href="/" class="text-black hover:text-orange-400">homepage</a><br>
-      </p>
-      <p>
-        To draw <a href="/canvas" class="text-black hover:text-orange-400">homepage</a><br>
+        <a href="/" class="text-black hover:text-orange-400"> GO TO TOP!</a><br>
       </p>
     </div>
-
+  <script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
   </body>
 
 </html>

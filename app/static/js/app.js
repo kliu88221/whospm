@@ -1,7 +1,7 @@
 const canvas = document.getElementById('pizzaCanvas');
 const ctx = canvas.getContext('2d');
 const toppingImgs = {};
-const toppings = ['Pepperoni', 'Pineapple', 'Ham'];
+const toppings = ['Pepperoni', 'Pineapple', 'Ham', 'Mushroom', 'Demon', 'Cheese'];
 
 toppings.forEach(item => {
   const img = new Image()
@@ -94,12 +94,14 @@ async function savePizza() {
     alert("No changes to save!");
     return;
   }
-  const saveButton = document.getElementById('saveBtn');
-  const originalText = saveButton.innerText; 
+
+
+  const btn = document.getElementById('saveBtn');
+  const originalText = btn.innerText; 
   const payload = JSON.stringify(pizza);
 
-  saveBtn.innerText = "Saving...";
-  saveBtn.disabled = true;
+  btn.innerText = "Saving...";
+  btn.disabled = true;
 
   try {
     const response = await fetch('/db/save_pizza', {
@@ -112,12 +114,10 @@ async function savePizza() {
 
     if (response.ok && ret.status === "success") {
       isSaved = true;
-      // window.location.href = "/profile";
+      
       setTimeout(() => {
-        saveBtn.innerText = originalText;
-        saveBtn.disabled = false;
-        saveBtn.classList.remove("bg-blue-500", "hover:bg-blue-600");
-        saveBtn.classList.add("bg-green-500", "hover:bg-green-600");
+        btn.innerText = originalText;
+        btn.disabled = true;
       }, 2000);
       console.log("Success:", ret);
     } else {
@@ -125,20 +125,14 @@ async function savePizza() {
     }
 
   } catch (error) {
-    // network crashes
     console.error("save error:", error);
-    saveBtn.innerText = "Error saving!!";
-    saveBtn.classList.remove("bg-green-500");
-    saveBtn.classList.add("bg-red-500");
+    btn.innerText = "Error saving!!";
 
     setTimeout(() => {
-      saveBtn.innerText = originalText;
-      saveBtn.disabled = false;
-      saveBtn.classList.remove("bg-red-500");
-      saveBtn.classList.add("bg-green-500");
+      btn.innerText = originalText;
+      btn.disabled = false;
     }, 2000);
-    console.error("Network Error:", error);
-    alert("network error, check terminal, is server up?");
+    alert("network error, check terminal");
   }
 }
 

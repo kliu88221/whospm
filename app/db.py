@@ -37,6 +37,21 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS USER(
                     username TEXT PRIMARY KEY,
                     password TEXT);""")
 
+DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(
+                    topping_id INTEGER PRIMARY KEY,
+                    name TEXT,
+                    description TEXT,
+                    image_url TEXT);""")
+
+DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(
+                    pizza_id INTEGER PRIMARY KEY,
+                    username TEXT,
+                    flavor_text TEXT,
+                    sauce_name TEXT,
+                    sauce_color TEXT,
+                    FOREIGN KEY(username) REFERENCES USER(username));""")
+
+
 DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS POSTS(
                     post_id INTEGER PRIMARY KEY,
                     pizza_id INTEGER,
@@ -47,13 +62,6 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS POSTS(
                     FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id),
                     FOREIGN KEY(username) REFERENCES USER(username));""")
 
-DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS SAVED_PIZZAS(
-                    pizza_id INTEGER PRIMARY KEY,
-                    username TEXT,
-                    flavor_text TEXT,
-                    sauce_name TEXT,
-                    sauce_color TEXT,
-                    FOREIGN KEY(username) REFERENCES USER(username));""")
 
 DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(
                     entry_id INTEGER PRIMARY KEY,
@@ -64,28 +72,30 @@ DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS PIZZA_TOPPINGS(
                     FOREIGN KEY(pizza_id) REFERENCES SAVED_PIZZAS(pizza_id),
                     FOREIGN KEY(topping_id) REFERENCES TOPPINGS_MENU(topping_id));""")
 
-DB_CURSOR.execute("""CREATE TABLE IF NOT EXISTS TOPPINGS_MENU(
-                    topping_id INTEGER PRIMARY KEY,
-                    name TEXT,
-                    description TEXT,
-                    image_url TEXT);""")
 
-
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+# wtf lol
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   1,
                   'Pepperoni',
                   'salty too oily yum yum red circles',
                   '/static/img/pepperoni.png');""")
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   2,
                   'Pineapple',
                   'sweet yellow chunks. do they belong here?',
                   '/static/img/pineapple.png');""")
-DB_CURSOR.execute("""INSERT INTO TOPPINGS_MENU VALUES(
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   3,
                   'Ham',
                   'non circle salty yum yums',
                   '/static/img/ham.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(4, 'Mushroom', 'ts so bad', '/static/img/mushroom.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(5, 'Demon', '.̸͍͕̍̾̅̃.̵͕̼̇̿̈̀͆̄̾͊͝.̸̨̛̞́̑͗͑̄̒́̒̔̃̀̂ͅ.̶̨̛̛̘͙͍͚̥͉̝͔̥̀͛̾̌̐̊̍̉̎̕͠.̶̢̦̝͍͎̳̹̤̝͔̌͜͝.̷̢̛̮͈͉͓̘̖̥̟́͑͛̓̾̊̾͝.̷̨̻͍̥͆̒̇.̸̛̯͇̬̮̻͉̹̊͒̑̔́̎͌̀̊̑̂̂͊.̵̡̢̯̼͓̦̝̯̱̹̯̻̣́̾̓͌͒͗̊̌͋̓̌̂͛͝.̵̧͓̥̹̪̯̅̑̒͒̚̚.̷̡͔̣̤̞̙̬̺̩̦̾̈́͆̔̏̎̋͛̊͝...?', '/static/img/demon.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(6, 'Cheese', 'Get that 2nd cup o-cheese yeaa', '/static/img/cheese.png');""")
+                  
 DB.commit()
 DB.close()
 # Database functions >>
@@ -216,6 +226,42 @@ def get_pizza(pizza_id):
             for t in toppings
         ]
     }
+
+def get_pizza_all():
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    
+    DB_CURSOR.execute("SELECT pizza_id FROM SAVED_PIZZAS ORDER BY pizza_id DESC")
+    rows = DB_CURSOR.fetchall()
+    DB.close()
+    
+    results = []
+    if rows:
+        for p in rows:
+            pizza = get_pizza(p[0])
+            if pizza:
+                if len(pizza['toppings']) > 0:
+                    first = pizza['toppings'][0]['topping_id']
+                    pizza['flavor_highlight'] = get_topping_description(first)
+                else:
+                    pizza['flavor_highlight'] = "Yeah, looks like a delious piza to me :)"
+                
+                results.append(pizza)
+    return results
+
+def get_topping_description(topping_id):
+    DB_NAME = "Data/database.db"
+    DB = sqlite3.connect(DB_NAME)
+    DB_CURSOR = DB.cursor()
+    
+    DB_CURSOR.execute("SELECT description FROM TOPPINGS_MENU WHERE topping_id = ?", (topping_id,))
+    row = DB_CURSOR.fetchone()
+    
+    DB.close()
+    if row:
+        return row[0]
+    return "Yeah, looks like a delious piza to me :)"
 
 '''
 def edit_post(post_id, ):
