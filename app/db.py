@@ -94,7 +94,7 @@ DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(4, 'Mushroom', '
 
 DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(5, 'Demon', '.̸͍͕̍̾̅̃.̵͕̼̇̿̈̀͆̄̾͊͝.̸̨̛̞́̑͗͑̄̒́̒̔̃̀̂ͅ.̶̨̛̛̘͙͍͚̥͉̝͔̥̀͛̾̌̐̊̍̉̎̕͠.̶̢̦̝͍͎̳̹̤̝͔̌͜͝.̷̢̛̮͈͉͓̘̖̥̟́͑͛̓̾̊̾͝.̷̨̻͍̥͆̒̇.̸̛̯͇̬̮̻͉̹̊͒̑̔́̎͌̀̊̑̂̂͊.̵̡̢̯̼͓̦̝̯̱̹̯̻̣́̾̓͌͒͗̊̌͋̓̌̂͛͝.̵̧͓̥̹̪̯̅̑̒͒̚̚.̷̡͔̣̤̞̙̬̺̩̦̾̈́͆̔̏̎̋͛̊͝...?', '/static/img/demon.png');""")
 
-DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(5, 'Demon', 'Get that 2nd cup o-cheese yeaa', '/static/img/demon.png');""")
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(6, 'Cheese', 'Get that 2nd cup o-cheese yeaa', '/static/img/cheese.png');""")
                   
 DB.commit()
 DB.close()
@@ -243,12 +243,7 @@ def get_pizza_all():
             if pizza:
                 if len(pizza['toppings']) > 0:
                     first = pizza['toppings'][0]['topping_id']
-                    second = pizza['toppings'][1]['topping_id'] if len(pizza['toppings']) > 1 else None
                     pizza['flavor_highlight'] = get_topping_description(first)
-                    if(second):
-                        pizza['flavor_highlight'] += " & " + get_topping_description(second)
-                    else:
-                        pizza['flavor_highlight'] += ""
                 else:
                     pizza['flavor_highlight'] = "Yeah, looks like a delious piza to me :)"
                 
