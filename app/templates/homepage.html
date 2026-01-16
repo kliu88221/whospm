@@ -65,13 +65,15 @@
     </div>
 
     <div class="middle grid grid-cols-1 gap-6 p-8">
-      {%for pizza in results %}
-      <div class="pizza-container bg-white shadow-lg overflow-hidden flex flex-col items-center p-4">
+      {% for pizza in results %}
+      <div class="pizza-container bg-white overflow-hidden flex flex-col items-center p-8"
+          data-pizza='{{ pizza | tojson | safe }}'>
 
-        <canvas id="pizzaPost" width="500" height="500" class="border-4 border-orange-100 rounded-full bg-white"></canvas>
-        <div class ="info mt-4 text-center">
-          <p>{{ pizza.pizza_id|safe }}</p>
-          <p>{{ pizza.username|safe }}</p>
+        <canvas width="500" height="500" class="w-64 h-64 border-4 border-orange-100 rounded-full bg-white"></canvas>
+        
+        <div class="info mt-4 text-center">
+          <p class="font-bold text-orange-600">Pizza #{{ pizza.pizza_id }}</p>
+          <p class="text-sm text-gray-500">Chef: {{ pizza.username }}</p>
         </div>
 
       </div>

@@ -5,13 +5,13 @@ const toppings = {};
 let loaded = 0
 ingredients.forEach(item => {
   const img = new Image()
-  const path = '/static/img/' + ingredients.toLowerCase() +'.png'
+  const path = '/static/img/' + item.toLowerCase() +'.png'
   img.src = path
   img.onload = () =>{
     toppings[path] = img
     loaded++;
     if(loaded == ingredients.length) {
-      // render
+      render()
     }
   }
 })
@@ -19,13 +19,13 @@ ingredients.forEach(item => {
 function render(){
   const containers = document.querySelectorAll('.pizza-container')
   containers.forEach(c => {
-      const pizza = JSON.parse(container.dataset.pizza);
+      const pizza = JSON.parse(c.dataset.pizza);
       const canvas = container.querySelector('canvas');
       drawPizza(canvas, pizza);
   })
 }
 
-function drawPizza() {
+function drawPizza(canvas, pizza) {
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
