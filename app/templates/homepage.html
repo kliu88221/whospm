@@ -43,14 +43,19 @@
         Pizza Time
       </h1>
 
+      <a href="/canvas"
+          class="text-2xl font-bold absolute left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100">
+          NEW PIZZA
+        </a>
+
       {% if not logged_in %}
       <div class="flex gap-4">
         <a href="/login"
-           class="px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100 transition">
+           class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">
           Login
         </a>
         <a href="/register"
-           class="px-4 py-2 rounded-lg bg-orange-500 text-white hover:bg-orange-600 transition">
+           class="px-4 py-2 rounded-lg border border-orange-400 text-orange-500 hover:bg-orange-100">
           Register
         </a>
       </div>
@@ -67,13 +72,13 @@
     <div class="middle grid grid-cols-1 gap-6 p-8">
       {% for pizza in results %}
       <div class="pizza-container bg-white overflow-hidden flex flex-col items-center p-8"
-          data-pizza='{{ pizza | tojson | safe }}'>
+          data-pizza="{{ pizza | tojson | forceescape }}">
 
         <canvas width="500" height="500" class="w-64 h-64 border-4 border-orange-100 rounded-full bg-white"></canvas>
         
         <div class="info mt-4 text-center">
-          <p class="font-bold text-orange-600">Pizza #{{ pizza.pizza_id }}</p>
-          <p class="text-sm text-gray-500">Chef: {{ pizza.username }}</p>
+          <p class="font-bold">Pizza #{{ pizza.pizza_id }}</p>
+          <p class="italic text-sm text-gray-500">Chef: {{ pizza.username }}</p>
         </div>
 
       </div>

@@ -89,6 +89,13 @@ DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(
                   'Ham',
                   'non circle salty yum yums',
                   '/static/img/ham.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(4, 'Mushroom', 'ts so bad', '/static/img/mushroom.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(5, 'Demon', '...?', '/static/img/demon.png');""")
+
+DB_CURSOR.execute("""INSERT OR IGNORE INTO TOPPINGS_MENU VALUES(5, 'Demon', 'Get that 2nd cup o-cheese yeaa', '/static/img/demon.png');""")
+                  
 DB.commit()
 DB.close()
 # Database functions >>

@@ -1,7 +1,7 @@
 const canvas = document.getElementById('pizzaCanvas');
 const ctx = canvas.getContext('2d');
 const toppingImgs = {};
-const toppings = ['Pepperoni', 'Pineapple', 'Ham'];
+const toppings = ['Pepperoni', 'Pineapple', 'Ham', 'Mushroom', 'Demon', 'Cheese'];
 
 toppings.forEach(item => {
   const img = new Image()
@@ -118,8 +118,6 @@ async function savePizza() {
       setTimeout(() => {
         btn.innerText = originalText;
         btn.disabled = true;
-        btn.classList.remove("bg-blue-500", "hover:bg-blue-600");
-        btn.classList.add("bg-green-500", "hover:bg-green-600");
       }, 2000);
       console.log("Success:", ret);
     } else {
@@ -129,14 +127,10 @@ async function savePizza() {
   } catch (error) {
     console.error("save error:", error);
     btn.innerText = "Error saving!!";
-    btn.classList.remove("bg-green-500");
-    btn.classList.add("bg-red-500");
 
     setTimeout(() => {
       btn.innerText = originalText;
       btn.disabled = false;
-      btn.classList.remove("bg-red-500");
-      btn.classList.add("bg-green-500");
     }, 2000);
     alert("network error, check terminal");
   }

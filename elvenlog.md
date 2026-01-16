@@ -9,3 +9,5 @@ javascript POST using fetch vs async?
 jinja can potentiaslly create multiple divs and canvases because of my for loop, how to let javascript apply to each one?
 
 jinja json passed only partly rendering
+
+single quotes in json breaking html
